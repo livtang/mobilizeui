@@ -15,6 +15,7 @@ import { ErrorService } from './app/services/error.service';
 import { ApiService } from './app/services/api.service';
 import {EventListComponent} from './app/components/eventlist/eventlist.component';
 import {EventListService} from './app/components/eventlist/eventlist.service';
+import {ImageFormatterComponent} from './app/components/imageformatter/imageformatter.component';
 
 // Default MatFormField appearance to 'fill' as that is the new recommended approach and the
 // `legacy` and `standard` appearances are scheduled for deprecation in version 10.
@@ -28,10 +29,10 @@ import {EventListService} from './app/components/eventlist/eventlist.service';
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    AgGridModule.withComponents([EventListComponent])
+    AgGridModule.withComponents([EventListComponent, ImageFormatterComponent])
   ],
   entryComponents: [EventListComponent],
-  declarations: [EventListComponent],
+  declarations: [EventListComponent, ImageFormatterComponent],
   bootstrap: [EventListComponent],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

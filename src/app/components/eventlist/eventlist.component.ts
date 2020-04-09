@@ -1,6 +1,7 @@
 /* tslint:disable:no-console */
 import { EventListService } from './eventlist.service';
 import {Component, OnInit} from '@angular/core';
+import {ImageFormatterComponent} from '../imageformatter/imageformatter.component';
 
 @Component({
   selector: 'eventlist',
@@ -10,34 +11,23 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class EventListComponent implements OnInit {
-        // result => {
-        //   // @ts-ignore
-        //   this.dataSource = result as Event[];
-        //   console.log(this.dataSource[0]);
-        //   console.log(this.dataSource[1]);
-
-
-     // console;.
-    // @ts-ignore
 
   constructor(private eventListService: EventListService) {
     this.eventListService.getAllPublicEvents().subscribe(result => {
       this.dataSource = result as any as Event[];
     });
 
-    // console.log('hi ' + this.dataSource[0]);
   }
 
   events: Event[];
 
   eventsColumnDefs = [
-        {headerName: 'Event Name', field: 'title', resizable: true},
+        {headerName: 'Event Name', field: 'title', resizable: true, cellRenderer: (params: { value: string; }) => {
+            return '<a href="#">' + params.value + '</a>';
+          }},
         {headerName: 'Summary', field: 'description', resizable: true},
-    {
-      headerName: 'Details', field: 'browser_url', cellRenderer: (params: { value: string; }) => {
-        return '<a href="#">' + params.value + '</a>';
-      }
-    }
+        {headerName: 'Logo', field: 'featured_image_url' , autoWidth: true,  autoHeight: true, cellRendererFramework: ImageFormatterComponent }
+
     ];
 
   dataSource: Event[];
@@ -45,12 +35,14 @@ export class EventListComponent implements OnInit {
   columnsToDisplay = ['title', 'summary'];
 
   onCellClicked(event: any) {
-    if (event.column.headerName === 'Details' ) {
-      console.log('clicked on link');
-      // execute the action as you want here in on click of hyperlink
+    console.log('clicked on cell');
+    console.log(event.data);
+    if (event.colDef.field === 'title' ) {
+      console.log('clicked on title');
+      window.location.href = event.data.browser_url;
     }
-// here you can add multiple if statement based on colId to do the action      //on cell clicked
   }
+
   ngOnInit(): void {}
 
 }
