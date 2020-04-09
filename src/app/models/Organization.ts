@@ -1,4 +1,4 @@
-export class Organization{
+export class Organization {
   id: number;
   name: string;
   slug: string;
@@ -15,7 +15,7 @@ export class Organization{
   org_type: OrganizationType;
 }
 
-export enum RaceType{
+export enum RaceType {
   GOVERNOR, CONGRESSIONAL, SENATE, STATE_SENATE, STATE_LEG, SEC_STATE, ATTY_GENERAL, OTHER_LOCAL, OTHER_STATEWIDE
 }
 

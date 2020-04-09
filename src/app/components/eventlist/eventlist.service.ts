@@ -10,7 +10,7 @@ import {Event} from '../../models/Event';
 
 export class EventListService extends ApiService {
 
-  getAllPublicEvents(): Observable<Event[]>{
+  getAllPublicEvents(): Observable<Event[]> {
     console.info('called events service');
     return this.get<Event[]>('/organizations/1/events');
   }

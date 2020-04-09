@@ -11,10 +11,10 @@ import {DemoMaterialModule} from './app/material-module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {AgGridModule} from 'ag-grid-angular';
 
-import {TableExpandableRowsExample} from './app/table-expandable-rows-example';
 import { ErrorService } from './app/services/error.service';
 import { ApiService } from './app/services/api.service';
 import {EventListComponent} from './app/components/eventlist/eventlist.component';
+import {EventListService} from './app/components/eventlist/eventlist.service';
 
 // Default MatFormField appearance to 'fill' as that is the new recommended approach and the
 // `legacy` and `standard` appearances are scheduled for deprecation in version 10.
@@ -28,16 +28,17 @@ import {EventListComponent} from './app/components/eventlist/eventlist.component
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([EventListComponent])
   ],
-  entryComponents: [TableExpandableRowsExample],
-  declarations: [TableExpandableRowsExample, EventListComponent],
-  bootstrap: [TableExpandableRowsExample],
+  entryComponents: [EventListComponent],
+  declarations: [EventListComponent],
+  bootstrap: [EventListComponent],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
     ErrorService,
     ApiService,
-    HttpClient
+    HttpClient,
+    EventListService
   ]
 })
 export class AppModule {}

@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { Observable, throwError } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
 import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse
-} from "@angular/common/http";
-import { catchError, map } from "rxjs/operators";
-import {ErrorService} from "./error.service";
+} from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+import {ErrorService} from './error.service';
 
 @Injectable()
 export class ApiService {
@@ -14,7 +14,7 @@ export class ApiService {
   baseUrl = 'https://api.mobilize.us/v1';
 
   httpOptions = {
-  headers: new HttpHeaders({ "Content-Type": "application/json"})};
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'})};
 
   constructor(private httpClient: HttpClient, private errorService: ErrorService) {
 
@@ -27,24 +27,27 @@ export class ApiService {
       .pipe(
           map(this.extractContentFromResponse()),
           catchError(this.handleError())
-      
+
       );
   }
 
   private extractContentFromResponse<T>() {
     return (response: T) => {
-      const content = response["data"];
+      let content;
+      // @ts-ignore
+      content = response['data'];
+      // tslint:disable-next-line:no-console
       console.info(content);
-      return content as T;
-    }
+      return content as unknown as T;
+    };
   }
 
-  handleError<T>(){
+  handleError<T>() {
     return (errorResponse: any): Observable<any> => {
       return this.errorService.handleError(errorResponse);
-    }
+    };
   }
-  
-};
+
+}
 
 

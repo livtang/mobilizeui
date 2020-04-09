@@ -1,8 +1,8 @@
-import {Organization} from "./Organization";
-import {Contact} from "./Contact";
-import {Tag} from "./Tag";
-import {EventCampaign} from "./EventCampaign";
-import {Timeslot} from "./Timeslot";
+import {Organization} from './Organization';
+import {Contact} from './Contact';
+import {Tag} from './Tag';
+import {EventCampaign} from './EventCampaign';
+import {Timeslot} from './Timeslot';
 
 export class Event {
 
@@ -14,7 +14,7 @@ featured_image_url: string;
 high_priority: boolean;
 sponsor: Organization;
 timeslots: Timeslot[];
-location: Location;
+location: null;
 timezone: string;
 event_type: EventType;
 browser_url: string;
@@ -42,7 +42,7 @@ export enum Visibility {
   PRIVATE
 }
 
-export enum AccessibilityStatus{
+export enum AccessibilityStatus {
   ACCESSIBLE, NOT_ACCESSIBLE, NOT_SURE, null
 }
 
