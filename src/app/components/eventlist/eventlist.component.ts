@@ -2,6 +2,7 @@
 import { EventListService } from './eventlist.service';
 import {Component, OnInit} from '@angular/core';
 import {ImageFormatterComponent} from '../imageformatter/imageformatter.component';
+import {GridApi, GridOptions} from 'ag-grid-community';
 
 @Component({
   selector: 'eventlist',
@@ -19,14 +20,18 @@ export class EventListComponent implements OnInit {
 
   }
 
+  gridApi: GridApi;
+
   events: Event[];
 
   eventsColumnDefs = [
         {headerName: 'Event Name', field: 'title', resizable: true, cellRenderer: (params: { value: string; }) => {
             return '<a href="#">' + params.value + '</a>';
           }},
+        {headerName: 'Location', field: 'location.region', resizable: true},
         {headerName: 'Summary', field: 'description', resizable: true},
-        {headerName: 'Logo', field: 'featured_image_url' , autoWidth: true,  autoHeight: true, cellRendererFramework: ImageFormatterComponent }
+        {headerName: 'Logo', field: 'featured_image_url' , autoWidth: true,  autoHeight: true,
+          cellRendererFramework: ImageFormatterComponent }
 
     ];
 
@@ -42,6 +47,8 @@ export class EventListComponent implements OnInit {
       window.location.href = event.data.browser_url;
     }
   }
+
+
 
   ngOnInit(): void {}
 

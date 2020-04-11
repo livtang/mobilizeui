@@ -11,7 +11,8 @@ import {Event} from '../../models/Event';
 export class EventListService extends ApiService {
 
   getAllPublicEvents(): Observable<Event[]> {
+    // tslint:disable-next-line:no-console
     console.info('called events service');
-    return this.get<Event[]>('/organizations/1/events');
+    return this.get<Event[]>('https://api.mobilize.us/v1/organizations/1/events');
   }
 }
